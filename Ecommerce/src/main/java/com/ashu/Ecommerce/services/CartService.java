@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class CartService implements ICartService{
+public class CartService {
 
 
-    private final ICartGateway iCartGateway;
+   /* private final ICartGateway iCartGateway;
 
-    public CartService(@Qualifier("fakeStoreRestTemplateGateway") ICartGateway iCartGateway) {
+    public CartService(ICartGateway iCartGateway) {
         this.iCartGateway = iCartGateway;
     }
 
@@ -24,8 +24,14 @@ public class CartService implements ICartService{
         return iCartGateway.getAllCarts();
     }
 
+
     @Override
     public CartDTO getCartById(int id) throws IOException {
         return iCartGateway.getCartById(id);
     }
+
+    @Override
+    public CartDTO createProduct(CartDTO dto) {
+        return null;
+    }*/
 }

@@ -8,5 +8,7 @@ import java.util.List;
 public interface ICartService {
     List<CartDTO> getAllCarts() throws IOException;
 
-    CartDTO getCartById(int id) throws IOException;
+    CartDTO getCartById(Long id) throws IOException;
+
+    CartDTO createProduct(CartDTO dto);
 }

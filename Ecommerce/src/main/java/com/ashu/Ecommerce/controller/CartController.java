@@ -69,12 +69,17 @@ public class CartController {
     @GetMapping
     public ResponseEntity<List<CartDTO>> getAllCategories() throws IOException {
         List<CartDTO> result =  this.iCartService.getAllCarts();
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(iCartService.getAllCarts());
     }
 
     @GetMapping("/{id}")
-    public CartDTO getCartbyId(@PathVariable int id) throws IOException{
-        return this.iCartService.getCartById(id);
+    public ResponseEntity<CartDTO> getCartbyId(@PathVariable Long id) throws IOException{
+        return ResponseEntity.ok(iCartService.getCartById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<CartDTO> createProduct(@RequestBody CartDTO dto){
+        return ResponseEntity.ok(iCartService.createProduct(dto));
     }
 }
 
