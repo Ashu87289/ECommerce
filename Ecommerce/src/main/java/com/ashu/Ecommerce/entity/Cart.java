@@ -18,6 +18,7 @@ public class Cart extends BaseEntity{
     //private Integer id;
     private Integer userId;
     private String date;
+    //One cart has many products
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<CartProduct> products;
     private Integer __v;

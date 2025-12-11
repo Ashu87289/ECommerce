@@ -39,18 +39,22 @@ public class CartMapper {
     public static Cart toEntity(CartDTO dto) {
         List<CartProduct> cartProductEntities = null;
 
-        if (dto.getProducts() != null) {
-            cartProductEntities = dto.getProducts().stream()
-                    .map(CartMapper::toProductEntity)
-                    .toList();
-        }
 
-        return Cart.builder()
+        Cart cart = Cart.builder()
                 .userId(dto.getUserId())
                 .date(dto.getDate())
                 .products(cartProductEntities)
                 .__v(dto.get__v())
                 .build();
+
+        if (dto.getProducts() != null) {
+            cartProductEntities = dto.getProducts().stream()
+                    .map(CartMapper::toProductEntity)
+                    .toList();
+            cartProductEntities.forEach(p -> p.setCart(cart));
+            cart.setProducts(cartProductEntities);
+        }
+        return cart;
     }
 
     public static CartProduct toProductEntity(CartProductDTO dto) {   // FIXED
