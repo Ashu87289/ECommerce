@@ -4,10 +4,12 @@ import com.ashu.Ecommerce.Mapper.CartMapper;
 import com.ashu.Ecommerce.dto.CartDTO;
 import com.ashu.Ecommerce.dto.ProductDTO;
 import com.ashu.Ecommerce.entity.Cart;
+import com.ashu.Ecommerce.exception.ProductNotFoundException;
 import com.ashu.Ecommerce.repository.CartRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,13 +25,11 @@ public class CartServices implements ICartService{
 
     @Override
     public CartDTO getCartById(Long id) {
-        try {
+
             return  repo.findById(id)
                     .map(CartMapper::toDto)
-                    .orElseThrow(()->new Exception("Product Not Found"));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                    .orElseThrow(()-> new ProductNotFoundException("Product with id " + id + " Not Found."));
+
     }
 
     @Override
